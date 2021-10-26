@@ -25,7 +25,7 @@ jobs:
       - checkout:
           path: ~/myapp
       - ruby/install-deps
-      - run
+      - run:
           name: Database setup
           command: bundel exec rails db:migrate
       - rub:
