@@ -1,6 +1,6 @@
 jobs:
   build:
-    - image: circleci/ruby:3.0
+    - image: circleci/ruby:2.7
   working_directory: ~/myapp/src
   steps:
     - checkout:
@@ -15,7 +15,7 @@ jobs:
           MYSQL_DATABASE: myapp_development
           MYSQL_ROOT_PASSWORD: password
           MYSQL_USER: root
-    envronment:
+    environment:
       BUNDLE_JOBS: "3"
       BUNDLE_ENTRY: "3"
       APP_DATABASE_HOST: "127.0.0.1"
