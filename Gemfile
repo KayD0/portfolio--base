@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'react-rails'
 gem 'rexml'
 gem 'execjs'
+gem 'therubyracer', platforms: :ruby
