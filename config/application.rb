@@ -18,5 +18,7 @@ module Myapp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.web_console.permissions = '0.0.0.0/0'
+
+    config.web_console.development_only = false
   end
 end
