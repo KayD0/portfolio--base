@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'react-rails'
 gem 'mini_racer'
+gem 'rexml'
