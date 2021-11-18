@@ -1,7 +1,9 @@
+#https://qiita.com/murakami-mm/items/9587e21fc0ed57c803d0
+#
 version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.2
-  node: circleci/node@2.0.2
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   build:
@@ -33,9 +35,30 @@ jobs:
       - run:
           name: Database setup
           command: bundle exec rails db:migrate
+      #- run:
+      #    name: test
+      #    command: bundle exec rake test
+    
+  deploy:
+    docker:
+      - image: circleci/ruby:3.0.2
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.6
+      - heroku/install
       - run:
-          name: test
-          command: bundle exec rake test
+          name: heroku login
+          command: heroku container:login
+      - run:
+          name: push docker image
+          command: heroku container:push web -a $HEROKU_APP_NAME
+      - run:
+          name: release docker image
+          command: heroku container:release web -a $HEROKU_APP_NAME
+      - run:
+          name: database setup
+          command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
 
 workflows:
   version: 2
@@ -45,3 +68,9 @@ workflows:
       - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
