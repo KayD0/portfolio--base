@@ -38,7 +38,7 @@ services:
     depends_on: []
     environment:
       WEBPACKER_DEV_SERVER_HMR: "true"
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+      WEBPACKER_DEV_SERVER_HOST: webpacker
     ports:
       - "3035:3035"
 volumes:
